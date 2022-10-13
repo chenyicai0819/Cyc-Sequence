@@ -14,7 +14,7 @@ import java.util.Properties;
  * @package com.chen.sequence.utils
  * @date 2022/10/10 20:53
  * @since 1.0
- * Redis 链接池
+ * Redis 工具类
  */
 public class RedisUtils {
 
