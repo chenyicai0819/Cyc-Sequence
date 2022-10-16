@@ -20,7 +20,7 @@ public class App
     static {
         try {
             Properties properties = new Properties();
-            // 读取 redis.properties 中的内容
+            // 读取 sequence.properties 中的内容
             InputStream in = CommonUtils.readResourceFile("sequence.properties");
             // 将所读取的内容加载到配置中
             properties.load(in);
@@ -42,11 +42,10 @@ public class App
     public static void main( String[] args )
     {
         CycRedisGenerate cycRedisGenerate = new CycRedisGenerate();
-
-
-
         TemplateUtils templateUtils = new TemplateUtils();
         System.out.println(templateUtils.setTemplate(sequenceBean));
+
+
         // System.out.println(cycRedisGenerate.getRedisSequence(sequenceBean));
 
     }

@@ -2,6 +2,7 @@ package com.chen.sequence.utils;
 
 import com.chen.sequence.bean.SequenceBean;
 import com.chen.sequence.generate.CycRedisGenerate;
+import com.chen.sequence.generate.CycSnowFlakeGenerate;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -79,8 +80,13 @@ public class TemplateUtils {
             out = String.valueOf(calendar.get(Calendar.SECOND));
         } else if ("SEQ".equals(keyword)) {
             // 调用生成序列号的方法生成序号
-            CycRedisGenerate cycRedisGenerate = new CycRedisGenerate();
-            out = cycRedisGenerate.getRedisSequence(sequenceBean);
+            if ("REDIS".equals(sequenceBean.getSequenceEngine())){
+                CycRedisGenerate cycRedisGenerate = new CycRedisGenerate();
+                out = cycRedisGenerate.getRedisSequence(sequenceBean);
+            } else if ("SF".equals(sequenceBean.getSequenceEngine())) {
+                CycSnowFlakeGenerate cycSnowFlakeGenerate = new CycSnowFlakeGenerate();
+                out = String.valueOf(cycSnowFlakeGenerate.nextId());
+            }
         }
         return out;
     }
