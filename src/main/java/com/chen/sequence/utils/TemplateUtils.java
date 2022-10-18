@@ -3,6 +3,7 @@ package com.chen.sequence.utils;
 import com.chen.sequence.bean.SequenceBean;
 import com.chen.sequence.generate.CycRedisGenerate;
 import com.chen.sequence.generate.CycSnowFlakeGenerate;
+import com.chen.sequence.generate.CycUuidGenerate;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -86,6 +87,9 @@ public class TemplateUtils {
             } else if ("SF".equals(sequenceBean.getSequenceEngine())) {
                 CycSnowFlakeGenerate cycSnowFlakeGenerate = new CycSnowFlakeGenerate();
                 out = String.valueOf(cycSnowFlakeGenerate.nextId());
+            } else if ("UUID".equals(sequenceBean.getSequenceEngine())){
+                CycUuidGenerate cycUuidGenerate = new CycUuidGenerate();
+                out = cycUuidGenerate.getUuid(sequenceBean);
             }
         }
         return out;
